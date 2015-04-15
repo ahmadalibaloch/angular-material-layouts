@@ -1,0 +1,159 @@
+<md-toolbar layout="row" class="md-whiteframe-z1" layout-align="space-between center">
+	<div layout="row" layout-align="start center">
+		<md-button class="menu" ng-click="toggleLeft()" aria-label="Show Menu">
+			<md-icon md-svg-icon="menu"></md-icon>
+		</md-button>
+		<h1>Heating Project</h1>
+	</div>
+	<div class="fim-dropdown" layout="row" class="user" layout-align="end center">
+		<label><md-icon class="md-fab" md-svg-src="~/Scripts/bower_components/material-design-icons/social/svg/design/ic_person_48px.svg"></md-icon></label>
+		<div class="inner" layout="row" layout-align="space-between space-between">
+			<div flex="30" class="pic" layout-align="center center">
+				picture
+			</div>
+			<div flex layout="column" layout-align="space-between start" md-padding>
+				<div>User name</div>
+				<div>emaila@domain.com</div>
+				<div flex layout="row">
+					<md-button class="md-raised">View Profile</md-button>
+					<md-button class="md-raised" ng-click="logout();">Logout</md-button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</md-toolbar>
+
+<style>
+
+md-toolbar .user {
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    font-size: 20px;
+    color: #fff;
+    line-height: 100px;
+    text-align: center;
+    background: #000;
+    color: #202020;
+}
+
+    md-toolbar .user .inner {
+        border: 1px solid black;
+        color: #202020;
+    }
+
+.fim-dropdown {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+    .fim-dropdown > label {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        display: inline-block;
+        position: relative;
+        cursor: pointer;
+        font-size: 20px;
+        -webkit-transition: all .2s;
+        transition: all .2s;
+        padding: 0 10px;
+        color: #c5c5c5;
+    }
+
+        .fim-dropdown > label:hover {
+            color: #151515;
+        }
+
+        .fim-dropdown > label:after {
+            content: "";
+            display: block;
+            width: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 15px solid #c4c4c4;
+            position: absolute;
+            bottom: -15px;
+            left: 3.5px;
+            margin-right: 10px;
+            visibility: hidden;
+        }
+
+    .fim-dropdown > input {
+        display: none;
+    }
+
+    .fim-dropdown.active > label {
+        color: #202020;
+    }
+
+        .fim-dropdown.active > label:after {
+            visibility: visible;
+        }
+
+    .fim-dropdown > .inner {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        position: fixed;
+        width: 400px;
+        padding: 20px;
+        background: white;
+        -webkit-box-shadow: 0px 0px 2px 1px #c4c4c4;
+        box-shadow: 0px 0px 2px 1px #c4c4c4;
+        border: 1px solid #c4c4c4;
+        visibility: hidden;
+        margin-top: 15px;
+        color: #202020;
+        font-size: smaller;
+        text-align: center;
+    }
+
+    .fim-dropdown.active .inner {
+        visibility: visible;
+    }
+
+        .fim-dropdown.active .inner div, .fim-dropdown.active .inner div div {
+            margin: 5px !important;
+        }
+
+            .fim-dropdown.active .inner div div button {
+                margin: 5px;
+            }
+</style>
+</script>
+ $(document).ready(function(){
+        $(".fim-dropdown > label").click(function(){
+            $(".fim-dropdown").not($(this).parent()[0]).removeClass('active');
+ 
+            $(this).parent().toggleClass('active');
+            return false;
+        });
+ 
+        $(document).click(function(e){
+            var that = e.target;
+            if ($(that).closest(".fim-dropdown").length < 1 && !$(that).hasClass("fim-dropdown")) $(".fim-dropdown").removeClass('active');
+        });
+ 
+        $(window).on("load resize",function(){
+            $(".fim-dropdown > .inner").each(function(){
+                var src = $(this).parent().children("label");
+                // Position
+                var left = src.offset().left + src.outerHeight()/2 - $(this).outerWidth()/2;
+                if (left + $(this).outerWidth() > $(window).width()) {
+                    left = $(window).width() - $(this).outerWidth();
+                }
+                if (left < 0) left = 0;
+ 
+                $(this).css({
+                        left: left-10,
+                top: top
+            });
+        });
+    });
+    });
+</script>
